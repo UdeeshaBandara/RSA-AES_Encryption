@@ -68,7 +68,7 @@ public class RSAMultiThreading {
 		privateKey= n.getPrivate(FileHandling.baseLocationRSA+"RSA_Keys/receiverPrivateKey.txt", "RSA");
 		
 		
-		cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher = Cipher.getInstance("RSA");
 		cipher.init(Cipher.ENCRYPT_MODE,publicKey );
 		
 	}
@@ -78,7 +78,7 @@ public class RSAMultiThreading {
 	
 	public static void encryptOne() throws Exception{
 		Cipher cipher1;
-		cipher1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher1 = Cipher.getInstance("RSA");
 		cipher1.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readOne,0,47185920);
 		ByteArrayInputStream bis1 = new ByteArrayInputStream(readOne);
@@ -91,7 +91,7 @@ public class RSAMultiThreading {
 	public static void encryptTwo() throws Exception{
 		Cipher cipher2;
 		
-		cipher2 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher2 = Cipher.getInstance("RSA");
 		cipher2.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readTwo,0,47185920);
 		ByteArrayInputStream bis2 = new ByteArrayInputStream(readTwo);
@@ -109,7 +109,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher3;
 		
-		cipher3 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher3 = Cipher.getInstance("RSA");
 		cipher3.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readThree,0,47185920);
 		ByteArrayInputStream bis3 = new ByteArrayInputStream(readThree);
@@ -126,7 +126,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher4;
 		
-		cipher4 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher4 = Cipher.getInstance("RSA");
 		cipher4.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readFour,0,47185920);
 		ByteArrayInputStream bis4 = new ByteArrayInputStream(readFive);
@@ -143,7 +143,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher5;
 		
-		cipher5 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher5 = Cipher.getInstance("RSA");
 		cipher5.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readFive,0,47185920);
 		ByteArrayInputStream bis5 = new ByteArrayInputStream(readFive);
@@ -162,7 +162,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher6;
 		
-		cipher6 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher6 = Cipher.getInstance("RSA");
 		cipher6.init(Cipher.ENCRYPT_MODE,publicKey );
 		binEncrypt.read(readSix,0,47185920);
 		ByteArrayInputStream bis6 = new ByteArrayInputStream(readSix);
@@ -179,7 +179,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher7;
 		
-		cipher7 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher7 = Cipher.getInstance("RSA");
 		cipher7.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readOne,0,47185920);
 		ByteArrayInputStream bis1 = new ByteArrayInputStream(readOne);
@@ -414,15 +414,15 @@ public class RSAMultiThreading {
 		
 		initiate();
 	    
-		//doEncryption();
+		doEncryption();
 			
 		
-		joinEncryptedFiles();
+		//joinEncryptedFiles();
 
 	
-		doDecryption();
+		//doDecryption();
 		
-//		joinDencryptedFiles();
+		//joinDencryptedFiles();
 	
 	}
 
