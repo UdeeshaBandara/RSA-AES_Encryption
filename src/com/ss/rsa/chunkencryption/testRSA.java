@@ -1,4 +1,4 @@
-package com.ss.rsa.encrypt;
+package com.ss.rsa.chunkencryption;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -358,11 +358,11 @@ public class testRSA{
 		
 		encrypt.initiate();
 		
-		encrypt en = new encrypt();
-		IOCopier io=new IOCopier(en,new File(FileHandling.encryptedFile), new File[] {
-	               new File(FileHandling.encryptTempOne), new File(FileHandling.encryptTempTwo), new File(FileHandling.encryptTempThree), 
-		new File(FileHandling.encryptTempFour), new File(FileHandling.encryptTempFive), 
-		new File(FileHandling.encryptTempSix) });
+//		encrypt en = new encrypt();
+//		IOCopier io=new IOCopier(en,new File(FileHandling.encryptedFile), new File[] {
+//	               new File(FileHandling.encryptTempOne), new File(FileHandling.encryptTempTwo), new File(FileHandling.encryptTempThree), 
+//		new File(FileHandling.encryptTempFour), new File(FileHandling.encryptTempFive), 
+//		new File(FileHandling.encryptTempSix) });
 	    
 //	   
 		
@@ -374,9 +374,9 @@ public class testRSA{
 //	               new File(FileHandling.encryptTempOne), new File(FileHandling.encryptTempTwo), new File(FileHandling.encryptTempThree), 
 //		new File(FileHandling.encryptTempFour), new File(FileHandling.encryptTempFive), 
 //		new File(FileHandling.encryptTempSix) });
-
-	
-	
+//
+//	
+//	
 //		 new Thread(() -> {
 //				try {
 //					decryptOne();
@@ -437,43 +437,43 @@ public class testRSA{
 	}
 
 }
-
-class IOCopier extends Thread {
-	
-	encrypt en;
-	File[] sourcesClass;
-	File destina;
-	IOCopier(encrypt enc,File desti,File[] sources){
-		en=enc;
-		destina=desti;
-		sourcesClass=sources;
-		start();
-		
-	}
-	 public void run()
-	  {
-	    en.executeEncryptMethods();
-	  }
-    public static void joinFiles(File destination, File[] sources) throws IOException {
-    	
-        OutputStream output = null;
-        InputStream input = null;
-        
-        try {
-            output = new BufferedOutputStream(new FileOutputStream(destination, true));
-            
-            for (File source : sources){
-            	
-            	 input = null;
-            	 input = new BufferedInputStream(new FileInputStream(source));
-                 IOUtils.copy(input, output);
-               
-            }
-        } 
-        finally {
-        	
-        	 IOUtils.closeQuietly(input);
-        	 IOUtils.closeQuietly(output);
-        }
-    }   
-}
+//
+//class IOCopierr extends Thread {
+//	
+//	encrypt en;
+//	File[] sourcesClass;
+//	File destina;
+//	IOCopierr(encrypt enc,File desti,File[] sources){
+//		en=enc;
+//		destina=desti;
+//		sourcesClass=sources;
+//		start();
+//		
+//	}
+//	 public void run()
+//	  {
+//	    en.executeEncryptMethods();
+//	  }
+//    public static void joinFiles(File destination, File[] sources) throws IOException {
+//    	
+//        OutputStream output = null;
+//        InputStream input = null;
+//        
+//        try {
+//            output = new BufferedOutputStream(new FileOutputStream(destination, true));
+//            
+//            for (File source : sources){
+//            	
+//            	 input = null;
+//            	 input = new BufferedInputStream(new FileInputStream(source));
+//                 IOUtils.copy(input, output);
+//               
+//            }
+//        } 
+//        finally {
+//        	
+//        	 IOUtils.closeQuietly(input);
+//        	 IOUtils.closeQuietly(output);
+//        }
+//    }   
+//}

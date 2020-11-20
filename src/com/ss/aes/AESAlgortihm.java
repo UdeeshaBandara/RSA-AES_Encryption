@@ -55,7 +55,7 @@ public class AESAlgortihm {
     private static void performCryptography(int cipherMode, File inputFile,File outputFile) throws AESException {
         try {
             
-            Cipher cipher = Cipher.getInstance("AESS");
+            Cipher cipher = Cipher.getInstance("AES");
             cipher.init(cipherMode, secretKey);
             System.out.print(cipherMode);
              

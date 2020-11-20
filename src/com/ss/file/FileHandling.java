@@ -23,7 +23,7 @@ public class FileHandling {
 	public static String baseLocationRSA = "E:\\Note\\Notes\\SS\\CW-2\\RSA\\";
 	
 	//file locations for encryption file
-	public static String encryptedFile=baseLocationRSA+"EncryptedFiles\\confidential.txt";
+	public static String encryptedFile=baseLocationRSA+"\\EncryptedConfidential.txt";
 	
 	//Temporary file locations for encryption files
 	public static String encryptTempOne=baseLocationRSA+"confidential1.txt";
@@ -35,7 +35,7 @@ public class FileHandling {
 	
 	
 	//file locations for encryption file
-	public static String decryptedFile=baseLocationRSA+"DecryptedFiles\\decrypted.txt";
+	public static String decryptedFile=baseLocationRSA+"\\DecryptedConfidential.txt";
 	
 	//Temporary file locations for decryption files
 	public static String decryptTempOne=baseLocationRSA+"decrypt1.txt";

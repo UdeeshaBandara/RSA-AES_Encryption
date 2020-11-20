@@ -59,14 +59,13 @@ public class RSAMultiThreading {
 		fisEncrypt	= new FileInputStream(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\DecryptedFiles\\decryptedFile.txt"));
 		binEncrypt =new BufferedInputStream(fisEncrypt);  
 		
-		fisDecrypt	= new FileInputStream(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\confidential.txt"));
+		fisDecrypt	= new FileInputStream(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\EncryptedConfidential.txt"));
 		binDecrypt =new BufferedInputStream(fisDecrypt);  
 		
 		KeyHandling n = new KeyHandling();
 		
 		publicKey =n.getPublic(FileHandling.baseLocationRSA+"RSA_Keys/receiverPublicKey.txt", "RSA");
 		privateKey= n.getPrivate(FileHandling.baseLocationRSA+"RSA_Keys/receiverPrivateKey.txt", "RSA");
-		
 		
 		
 		cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -86,14 +85,8 @@ public class RSAMultiThreading {
 		  
 		while ((bis1.read(encryptOne)) != -1) {
 		    	FileHandling.writeToFile(new File(FileHandling.encryptTempOne),cipher1.doFinal(encryptOne));
-			//	bufferOne.put(cipher1.doFinal(encryptOne));
 		}
-//
-//		 FileChannel fc = new FileOutputStream("E:\\Note\\Notes\\SS\\CW-2\\RSA\\confidential1.txt").getChannel();
-//		    fc.write(bufferOne);
-//		    fc.close();
-//		bis1.close();
-		
+		bis1.close();
 	}
 	public static void encryptTwo() throws Exception{
 		Cipher cipher2;
@@ -186,7 +179,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher7;
 		
-		cipher7 = Cipher.getInstance("RSA");
+		cipher7 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
 		cipher7.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readOne,0,47185920);
 		ByteArrayInputStream bis1 = new ByteArrayInputStream(readOne);
@@ -203,7 +196,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher8;
 		
-		cipher8 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher8 = Cipher.getInstance("RSA");
 		cipher8.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readTwo,0,47185920);
 		ByteArrayInputStream bis2 = new ByteArrayInputStream(readTwo);
@@ -220,7 +213,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher9;
 		
-		cipher9 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher9 = Cipher.getInstance("RSA");
 		cipher9.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readThree,0,47185920);
 		ByteArrayInputStream bis3 = new ByteArrayInputStream(readThree);
@@ -237,7 +230,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher10;
 		
-		cipher10 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher10 = Cipher.getInstance("RSA");
 		cipher10.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readFour,0,47185920);
 		ByteArrayInputStream bis4 = new ByteArrayInputStream(readFour);
@@ -253,7 +246,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher11;
 		
-		cipher11 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher11 = Cipher.getInstance("RSA");
 		cipher11.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readFive,0,47185920);
 		ByteArrayInputStream bis5 = new ByteArrayInputStream(readFive);
@@ -269,7 +262,7 @@ public class RSAMultiThreading {
 		
 		Cipher cipher12;
 		
-		cipher12 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		cipher12 = Cipher.getInstance("RSA");
 		cipher12.init(Cipher.DECRYPT_MODE,privateKey );
 		binDecrypt.read(readSix,0,47185920);
 		ByteArrayInputStream bis6 = new ByteArrayInputStream(readSix);
@@ -281,234 +274,162 @@ public class RSAMultiThreading {
 			
 		bis6.close();
 	}
-	public static void getFileToEncrypt(File f) throws Exception{
+
+	public static void doEncryption(){
 		
+
+	    new Thread(() -> {
+			try {
+				encryptOne();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	    
+	    new Thread(() -> {
+			try {
+				encryptTwo();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	    
+	    new Thread(() -> {
+			try {
+				encryptThree();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	    
+	    new Thread(() -> {
+			try {
+				encryptFour();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	    
+	    new Thread(() -> {
+			try {
+				encryptFive();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+	    
+	    new Thread(() -> {
+			try {
+				encryptSix();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}).start();
+		
+		
+	}
+	public static void joinEncryptedFiles() throws IOException{
+		
+		 IOCopier.joinFiles(new File(FileHandling.encryptedFile), new File[] {
+	               new File(FileHandling.encryptTempOne), new File(FileHandling.encryptTempTwo), new File(FileHandling.encryptTempThree), 
+		new File(FileHandling.encryptTempFour), new File(FileHandling.encryptTempFive), 
+		new File(FileHandling.encryptTempSix) });
+		
+	}
 	
-		//  bin1.skip(11);
-		  binEncrypt.read(readTwo,0,11);
-		  binEncrypt.read(readFive,0,11);
+	public static void doDecryption(){
+		
+		 new Thread(() -> {
+				try {
+					decryptOne();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
 		    
+		    new Thread(() -> {
+				try {
+					decryptTwo();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
+		    
+		    new Thread(() -> {
+				try {
+					decryptThree();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
+		    
+		    new Thread(() -> {
+				try {
+					decryptFour();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
+		    
+		    new Thread(() -> {
+				try {
+					decryptFive();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
+		    
+		    new Thread(() -> {
+				try {
+					decryptSix();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}).start();
 		
-		  ByteArrayInputStream bis2 = new ByteArrayInputStream(readTwo);
-		  ByteArrayInputStream bis3 = new ByteArrayInputStream(readFive);
-		  
 		
-		 
-		
-		
-	
-		
-		
-	  
-		//fis.skip(20);
-	//	String stringss = new String(fbytes);
-//		KeyHandling n = new KeyHandling();
-//		publicKey =n.getPublic(FileHandling.baseLocation+"RSA_Keys/receiverPublicKey.txt", "RSA");
-//		try{for(int loopEncrypt=0;loopEncrypt<=f.length();)
-//		{
-//			fis.read(fbytes, 0, 117);
-//			fis.skip(loopEncrypt);
-//			loopEncrypt+=117;
-//			
-	//	System.out.println(fis.read(fbytes, 0, 117));
-		
-		//cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-		//cipher.init(Cipher.ENCRYPT_MODE,publicKey );
-//		FileHandling.writeToFile(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\confidential.txt"),fbytes);
-//		
-//	
-//		}}
-//		finally
-//		{
-//			fis.close();
-//			
-//		}
-
-		fisEncrypt.close();
-		
-
 	}
-	public static void getFileToDecrypt(File f) throws Exception{
-		FileInputStream fis = new FileInputStream(f);
+	public static void joinDencryptedFiles() throws IOException{
+		
+		 IOCopier.joinFiles(new File(FileHandling.decryptedFile), new File[] {
+	               new File(FileHandling.decryptTempOne), new File(FileHandling.decryptTempTwo), new File(FileHandling.decryptTempThree), 
+		new File(FileHandling.decryptTempFour), new File(FileHandling.decryptTempFive), 
+		new File(FileHandling.decryptTempSix) });
 	
-		byte[] fbytes = new byte[128];
-		int decryptFileSize=(int) f.length();
-		
-		
-		
-		System.out.println(decryptFileSize);
-	
-		//fis.skip(20);
-
-	
-		
-		cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-		cipher.init(Cipher.DECRYPT_MODE,privateKey);
-		
-		 while ((fis.read(fbytes)) != -1) {
-		    	FileHandling.writeToFile(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\decrypt.txt"),cipher.doFinal(fbytes));
-					
-		    }
-		
-		//		for(int loop=0;loop<decryptFileSize;)
-//		{	
-//			
-//			
-//			fis.read(fbytes);
-//			
-//			fis.skip(loop);
-//		
-//			loop+=128;
-//		
-//			
-//			cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
-//			cipher.init(Cipher.DECRYPT_MODE,privateKey);
-//			FileHandling.writeToFile(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\decrypt.txt"),cipher.doFinal(fbytes));
-//		
-//		}
-//		
-	//System.out.println(n.getPublic(FileHandling.baseLocation+"RSA_Keys/receiverPublicKey.txt", "RSA").getModulus().bitLength());
-		fis.close();
-	}
-
-	public void executeEncryptMethods(){
-		
-		
-		
 	}
 	public static void main(String[] args) throws Exception {
 	
 		
 		initiate();
 	    
-//	    new Thread(() -> {
-//			try {
-//				encryptOne();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
-//	    
-//	    new Thread(() -> {
-//			try {
-//				encryptTwo();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
-//	    
-//	    new Thread(() -> {
-//			try {
-//				encryptThree();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
-//	    
-//	    new Thread(() -> {
-//			try {
-//				encryptFour();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
-//	    
-//	    new Thread(() -> {
-//			try {
-//				encryptFive();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
-//	    
-//	    new Thread(() -> {
-//			try {
-//				encryptSix();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}).start();
+		//doEncryption();
+			
 		
-		
-////	    
-//		getFileToDecrypt(new File("E:\\Note\\Notes\\SS\\CW-2\\RSA\\confidential.txt"));
-////		
-		 IOCopier.joinFiles(new File(FileHandling.encryptedFile), new File[] {
-	               new File(FileHandling.encryptTempOne), new File(FileHandling.encryptTempTwo), new File(FileHandling.encryptTempThree), 
-		new File(FileHandling.encryptTempFour), new File(FileHandling.encryptTempFive), 
-		new File(FileHandling.encryptTempSix) });
+		joinEncryptedFiles();
 
 	
-//	
-//		 new Thread(() -> {
-//				try {
-//					decryptOne();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
-//		    
-//		    new Thread(() -> {
-//				try {
-//					decryptTwo();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
-//		    
-//		    new Thread(() -> {
-//				try {
-//					decryptThree();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
-//		    
-//		    new Thread(() -> {
-//				try {
-//					decryptFour();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
-//		    
-//		    new Thread(() -> {
-//				try {
-//					decryptFive();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
-//		    
-//		    new Thread(() -> {
-//				try {
-//					decryptSix();
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}).start();
+		doDecryption();
+		
+//		joinDencryptedFiles();
 	
-//	
-//		 IOCopier.joinFiles(new File(FileHandling.decryptedFile), new File[] {
-//	               new File(FileHandling.decryptTempOne), new File(FileHandling.decryptTempTwo), new File(FileHandling.decryptTempThree), 
-//		new File(FileHandling.decryptTempFour), new File(FileHandling.decryptTempFive), 
-//		new File(FileHandling.decryptTempSix) });
-//	
 	}
 
 }
+
+
+//Files joiner class
 
 class IOCopier extends Thread {
 	
