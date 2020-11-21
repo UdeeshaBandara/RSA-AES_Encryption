@@ -78,8 +78,6 @@ class encrypt {
 	}
 	 
 	
-	
-	
 	public static void encryptOne() throws Exception{
 		Cipher cipher1;
 		cipher1 = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -166,8 +164,6 @@ class encrypt {
 		
 		bis5.close();
 	}
-	
-	
 	public static void encryptSix() throws Exception{
 		
 		Cipher cipher6;
@@ -185,6 +181,8 @@ class encrypt {
 		
 		bis6.close();
 	}
+	
+	
 	public static void decryptOne() throws Exception{
 		
 		Cipher cipher7;

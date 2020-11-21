@@ -156,8 +156,6 @@ public class RSAMultiThreading {
 		
 		bis5.close();
 	}
-	
-	
 	public static void encryptSix() throws Exception{
 		
 		Cipher cipher6;
@@ -175,6 +173,8 @@ public class RSAMultiThreading {
 		
 		bis6.close();
 	}
+	
+	
 	public static void decryptOne() throws Exception{
 		
 		Cipher cipher7;
@@ -277,7 +277,6 @@ public class RSAMultiThreading {
 
 	public static void doEncryption(){
 		
-
 	    new Thread(() -> {
 			try {
 				encryptOne();
@@ -403,9 +402,10 @@ public class RSAMultiThreading {
 	}
 	public static void joinDencryptedFiles() throws IOException{
 		
-		 IOCopier.joinFiles(new File(FileHandling.decryptedFile), new File[] {
+		IOCopier.joinFiles(new File(FileHandling.decryptedFile), new File[] {
 	               new File(FileHandling.decryptTempOne), new File(FileHandling.decryptTempTwo), new File(FileHandling.decryptTempThree), 
-		new File(FileHandling.decryptTempFour), new File(FileHandling.decryptTempFive), 
+		
+	               new File(FileHandling.decryptTempFour), new File(FileHandling.decryptTempFive), 
 		new File(FileHandling.decryptTempSix) });
 	
 	}
