@@ -420,7 +420,7 @@ public class RSAMultiThreading {
 		//joinEncryptedFiles();
 
 	
-		//doDecryption();
+	//	doDecryption();
 		
 		//joinDencryptedFiles();
 	
