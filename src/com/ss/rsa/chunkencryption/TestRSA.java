@@ -348,7 +348,7 @@ class encrypt {
 }
 
 
-public class testRSA{
+public class TestRSA{
 	
 	
 	

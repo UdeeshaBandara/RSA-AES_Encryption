@@ -17,7 +17,7 @@ public class FileHandling {
 	//File locations for AES encryption
 	public static String clearTextFile = baseLocationAES+"original.txt";
 	public static String clearTextNewFile = baseLocationAES+"neworiginal.txt";
-	public static String cipherTextFile = baseLocationAES+"Cipher.txt";
+	public static String cipherTextFile = baseLocationAES+"Confidential.txt";
 	
 	//Base file locations for RSA encryption
 	public static String baseLocationRSA = "E:\\Note\\Notes\\SS\\CW-2\\RSA\\";

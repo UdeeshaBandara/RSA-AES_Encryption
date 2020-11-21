@@ -24,7 +24,9 @@ public class AESAlgortihm {
   
     private static SecretKeySpec secretKey;
     private static byte[] key;
+    
     private final static Logger logger = Logger.getLogger(LogHandler.class.getName());
+    
     
     public static void setKey(String myKey) throws AESException  {
     	
@@ -44,13 +46,16 @@ public class AESAlgortihm {
             
 		}	
     }
+    
     public static void encrypt(File inputFile, File outputFile) throws AESException {
     	performCryptography(Cipher.ENCRYPT_MODE, inputFile, outputFile);
     }
+    
  
     public static void decrypt(File inputFile, File outputFile) throws AESException {
     	performCryptography(Cipher.DECRYPT_MODE, inputFile, outputFile);
     }
+    
  
     private static void performCryptography(int cipherMode, File inputFile,File outputFile) throws AESException {
         try {

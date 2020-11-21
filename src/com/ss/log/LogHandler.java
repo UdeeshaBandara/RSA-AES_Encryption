@@ -14,19 +14,25 @@ import com.ss.file.FileHandling;
 public class LogHandler {
   
 
-//	private static final LogManager logger = (LogManager) LogManager.getLogger("Logger");
+	//private static final LogManager logger = (LogManager) LogManager.getLogger("Logger");
     private static FileHandler fh = null;
     //private final static Logger logger = Logger.getLogger(LogHandler.class.getName());
+    
     public static void initt(){
     	 try {
-    	 fh=new FileHandler(FileHandling.logFile, false);
+    		 
+    	
+    		 fh=new FileHandler(FileHandling.logFile, false);
+    	 
     	 } catch (SecurityException | IOException e) {
-    	 e.printStackTrace();
+    	 
+    		 e.printStackTrace();
     	 }
-    	 Logger l = Logger.getLogger("");
-    	 fh.setFormatter(new SimpleFormatter());
-    	 l.addHandler(fh);
-    	 l.setLevel(Level.CONFIG);
+    	
+	    	 Logger l = Logger.getLogger("");
+	    	 fh.setFormatter(new SimpleFormatter());
+	    	 l.addHandler(fh);
+	    	 l.setLevel(Level.CONFIG);
     	 }
 
 	}
